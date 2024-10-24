@@ -20,7 +20,6 @@ int max_ticket() {
 }
 
 void lamport_mutex_init(){
-    
     for(int i = 0; i<N; i++){
       choosing[i] = 0;
       ticket[i] = 0;

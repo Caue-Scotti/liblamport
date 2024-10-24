@@ -30,10 +30,10 @@ static void * thread_start(void *arg)
     
     printf("Hello! I'm thread %d, id %lu!\n", tinfo->num, tinfo->id);
     
-    lamport_mutex_lock(tinfo->id);
+    lamport_mutex_lock((tinfo->num)-1);
     for (int i = 0; i < num_rep; i++)
         shared_var = shared_var + 1;
-    lamport_mutex_unlock(tinfo->id);
+    lamport_mutex_unlock((tinfo->num)-1);
     
     return 0x0;
 }
