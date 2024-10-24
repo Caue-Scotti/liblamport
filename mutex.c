@@ -31,13 +31,11 @@ static void * thread_start(void *arg)
     struct thread_info *tinfo = arg;
     
     printf("Hello! I'm thread %d, id %lu!\n", tinfo->num, tinfo->id);
+    pthread_mutex_lock(&lock);
     for (int i = 0; i < num_rep; i++) {
-        // MUTEX CODE BEGIN
-        pthread_mutex_lock(&lock);
         shared_var = shared_var + 1;
-        pthread_mutex_unlock(&lock);
-        // MUTEX CODE END
     }
+    pthread_mutex_unlock(&lock);
     
     return 0x0;
 }
