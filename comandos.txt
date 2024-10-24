@@ -1,0 +1,5 @@
+gcc -fPIC -c lamport.c
+gcc -shared -o liblamport.so lamport.o
+gcc -o programa programa.c -L./ llamport
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
