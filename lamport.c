@@ -27,19 +27,19 @@ void lamport_mutex_init(){
 }
 
 
-void lamport_mutex_lock(int thread_id){
-    choosing[thread_id] = 1;
-    ticket[thread_id] = max_ticket () + 1;
-    choosing[thread_id] = 0;
+void lamport_mutex_lock(int thread_num){
+    choosing[thread_num] = 1;
+    ticket[thread_num] = max_ticket () + 1;
+    choosing[thread_num] = 0;
     
     for (int j = 0; j < N; j++) {
         while (choosing[j]) /* nao fazer nada */;
 	    while (ticket[j] != 0 && (
-			(ticket[j] < ticket[thread_id]) || (ticket[j] == ticket[thread_id] && j < thread_id)
+			(ticket[j] < ticket[thread_num]) || (ticket[j] == ticket[thread_num] && j < thread_num)
 		)) /* nao fazer nada */;    
     }
 }
 
-void lamport_mutex_unlock(int thread_id){
-    ticket[thread_id] = 0;
+void lamport_mutex_unlock(int thread_num){
+    ticket[thread_num] = 0;
 }
